@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
-// import images from './images'
+import player from './player'
 
 export default combineReducers({
+    player
 
 })

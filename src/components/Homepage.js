@@ -8,7 +8,7 @@ export default class Homepage extends React.Component {
                <h1>A&A's Black Jack</h1>
                <Link to="/SignUp"><button>Register as a new user</button></Link>
                <br />
-               <button>Log in if you already have an account</button>
+               <Link to="/login"><button>Log in if you have already registered</button></Link>
            </div>
        )
    }

@@ -1,17 +1,16 @@
 import React from 'react'
-import SignUpForm from './SignUpForm'
+import LoginForm from './LoginForm'
 import { connect } from 'react-redux'
-import { signUp } from '../actions'
+import { login } from '../actions'
 
-class SignUpFormContainer extends React.Component {
-  state = { playerName: '', email: '', password: '' }
+class LoginFormContainer extends React.Component {
+  state = { email: '', password: '' }
 
   onSubmit = (event) => {
     event.preventDefault()
-    this.props.signUp(this.state.playerName, this.state.email, this.state.password)
-
+    console.log('state.email: ', this.state.email, 'state.password: ', this.state.password)
+    this.props.login(this.state.email, this.state.password)
     this.setState({
-        playerName: '',
         email: '',
         password: ''
     })
@@ -22,9 +21,9 @@ class SignUpFormContainer extends React.Component {
       [event.target.name]: event.target.value
     })
   }
-  
+
   render() {
-    return <SignUpForm
+    return <LoginForm
       onSubmit={this.onSubmit}
       onChange={this.onChange}
       values={this.state}
@@ -32,4 +31,4 @@ class SignUpFormContainer extends React.Component {
   }
 }
 
-export default connect(null, { signUp })(SignUpFormContainer)
+export default connect(null, { login })(LoginFormContainer)

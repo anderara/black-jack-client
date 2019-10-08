@@ -2,6 +2,7 @@ import React from 'react'
 import LoginForm from './LoginForm'
 import { connect } from 'react-redux'
 import { login } from '../actions'
+import { Redirect } from 'react-router-dom'
 
 class LoginFormContainer extends React.Component {
   state = { email: '', password: '' }
@@ -14,6 +15,7 @@ class LoginFormContainer extends React.Component {
         email: '',
         password: ''
     })
+
   }
 
   onChange = (event) => {
@@ -23,12 +25,23 @@ class LoginFormContainer extends React.Component {
   }
 
   render() {
+    if(this.props.player){
+      return <Redirect to="/lobby"/>
+    }
+    console.log('props.user', this.props.player)
     return <LoginForm
       onSubmit={this.onSubmit}
       onChange={this.onChange}
       values={this.state}
     />
+    
   }
 }
 
-export default connect(null, { login })(LoginFormContainer)
+function mapStateToProps (state) {
+  return { 
+            player: state.player
+      }
+}
+
+export default connect(mapStateToProps, { login })(LoginFormContainer)

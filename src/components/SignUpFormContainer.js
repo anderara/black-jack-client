@@ -15,6 +15,8 @@ class SignUpFormContainer extends React.Component {
         email: '',
         password: ''
     })
+
+    this.props.history.replace("/login")
   }
 
   onChange = (event) => {

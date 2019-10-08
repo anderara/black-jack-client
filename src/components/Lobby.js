@@ -1,14 +1,25 @@
 //black-jack-client/components/Lobby.js
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Lobby extends Component {
-    render() {
+export default function Lobby (props) {
+
+    const gameRoomName = props.gameRoomName
+    console.log('props in lobby.js is:', props)
+
         return (
+
             <div>
-                This is the fuckin lobby room ya bas.
-            </div>
-            
-            
+            <h1>This is the lobby room ya bas</h1>
+            <form onSubmit={props.onSubmit}>
+                <label>
+                Create a new room
+                </label>
+                <input type='text' name='room name' value={gameRoomName} onChange={props.onChange}/>
+                <label>Room Name</label>
+            <input type='submit' value='submit'/>
+        </form>
+        </div>
+        
         )
-    }
 }
+

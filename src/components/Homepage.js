@@ -6,7 +6,7 @@ export default class Homepage extends React.Component {
        return (
            <div>
                <h1>A&A's Black Jack</h1>
-               <button>Register as a new user</button>
+               <Link to="/SignUp"><button>Register as a new user</button></Link>
                <br />
                <button>Log in if you already have an account</button>
            </div>

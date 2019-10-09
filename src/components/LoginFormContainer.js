@@ -34,7 +34,6 @@ class LoginFormContainer extends React.Component {
       onChange={this.onChange}
       values={this.state}
     />
-    
   }
 }
 

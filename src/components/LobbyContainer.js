@@ -1,43 +1,65 @@
 import React from 'react'
 import Lobby from './Lobby'
 import { connect } from 'react-redux'
-import { createGameRoom } from '../actions'
+import { createGameRoom, baseUrl, addRooms} from '../actions'
 //import { Redirect } from 'react-router-dom'
 
 class LobbyContainer extends React.Component {
+
+  // componentDidMount(){
+  //   console.log('Sloppy function', displayRooms())
+  // }
+  source = new EventSource(`${baseUrl}/gameroom`)
+
+  componentDidMount() {
+    this.source.onmessage = event => {
+      console.log(event)
+      const rooms = JSON.parse(event.data)
+      // this.setState({gameRoomName:rooms})
+      this.props.addRooms(rooms)
+    }
+    // console.log("TESTING stream:", rooms)
+  }
+
   state = { gameRoomName: ''}
+  
 
   onSubmit = (event) => {
     event.preventDefault()
-    console.log('Lobby name: ', this.state.gameRoomName)
+    // console.log('Lobby name: ', this.state.gameRoomName)
     this.props.createGameRoom(this.state.gameRoomName)
     this.setState({
         gameRoomName: ''
     })
-
   }
 
   onChange = (event) => {
-      console.log('I am changing in the lobby', event.target.value)
+      // console.log('I am changing in the lobby', event.target.value)
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
   render() {
-      console.log('lobby container ->', this.onChange)
-    return <Lobby
+    // console.log('this state in the render', this.state)
+      // console.log('lobby container ->', this.onChange)
+      // { this.state.gameRoomName.length>0?this.state.gameRoomName.map(gameroom => <li>{gameroom}</li>):'loading...'}
+    return <div> <Lobby
       onSubmit={this.onSubmit}
       onChange={this.onChange}
       value={this.state}
+      rooms = {this.props.rooms}
     />
+    
+    </div>
   }
 }
 
 function mapStateToProps(state) {
   return { 
-            player: state.player
+            player: state.player,
+            rooms: state.rooms
       }
 }
 
-export default connect(mapStateToProps, { createGameRoom })(LobbyContainer)
+export default connect(mapStateToProps, { createGameRoom, addRooms })(LobbyContainer)

@@ -33,6 +33,11 @@ class LobbyContainer extends React.Component {
     })
   }
 
+  onJoinRoom = (event) => {
+    event.preventDefault()
+    console.log("gameRoomId from lobby is:", event.target.id)
+  }
+
   onChange = (event) => {
       // console.log('I am changing in the lobby', event.target.value)
     this.setState({
@@ -47,6 +52,7 @@ class LobbyContainer extends React.Component {
     return <div> <Lobby
       onSubmit={this.onSubmit}
       onChange={this.onChange}
+      onJoinRoom={this.onJoinRoom}
       value={this.state}
       rooms = {this.props.rooms}
     />

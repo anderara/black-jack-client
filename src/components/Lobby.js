@@ -19,11 +19,19 @@ export default function Lobby (props) {
                 <label>Room Name</label>
             <input type='submit' value='submit'/>
             </form>
-            {console.log('Logging PROPS.ROOMS in the Lobby:', props.rooms)}
             
                 {gameRooms.length?gameRooms.map(gameroom => { 
-                   return <li key={gameroom.id}>{gameroom.gameRoomName}</li>
-                }): 'loading...'}
+                   return (
+                    <div border ="2">
+                        {/* {console.log('Logging PROPS.ROOMS in the Lobby:', props.rooms[0].id)} */}
+                        <form onSubmit={props.onJoinRoom} key={gameroom.id} id={gameroom.id} name={gameroom.id}>
+                            <p>{gameroom.gameRoomName}</p>
+                            Wanna join this room?
+                            <input type="submit" value="Join Room" />
+                        </form>
+                    </div>)
+                    })
+                : 'loading...'}
                 
             
         </div>

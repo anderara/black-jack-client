@@ -1,6 +1,7 @@
 import request from 'superagent'
 
 export const LOGIN = 'LOGIN'
+export const CREATE_ROOM = 'CREATE_ROOM'
 
 // const baseUrl = 'http://localhost:4000'
 // const baseUrl = 'http://172.16.30.254:4000'
@@ -44,27 +45,29 @@ export const login = (email, password) => (dispatch, getState) => {
             const action = loginUser(response.body)
             dispatch(action)
         })
-        .catch(console.error)
+        .catch(res => {
+            alert(res.message)
+        })
         }
 
-// export const getPlayers = () => (dispatch, getState) => {
-// const state = getState()
-// const { playerName } = state
+function createRoom(payload) {
+    console.log('createRoom payload -> ', payload)
+    return {
+        type: CREATE_ROOM,
+        payload
+    }
+}
 
-// if (!playerName.length) {
-//     request(`${baseUrl}/players`)
-//     .then(response => {
-//         const action = allPlayers(response.body)
-
-//         dispatch(action)
-//     })
-//     .catch(console.error)
-// }
-// }
-
-// function newImage (payload) {
-//     return {
-//     type: NEW_IMAGE,
-//     payload
-//     }
-// }
+export const createGameRoom = (gameRoomName) => (dispatch, getState) => {
+    request
+        .post(`${baseUrl}/lobby`)
+        .send({gameRoomName})
+        .then(response => {
+            console.log('Create room named ', response)
+            const action = createRoom()
+            dispatch(action)
+        })
+        .catch(res => {
+            alert(res.message)
+        })
+}

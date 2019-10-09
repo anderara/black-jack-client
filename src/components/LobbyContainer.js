@@ -10,10 +10,10 @@ class LobbyContainer extends React.Component {
   onSubmit = (event) => {
     event.preventDefault()
     console.log('Lobby name: ', this.state.gameRoomName)
-   /* this.props.createGameRoom(this.state.gameRoomName)
+    this.props.createGameRoom(this.state.gameRoomName)
     this.setState({
         gameRoomName: ''
-    })*/
+    })
 
   }
 
@@ -34,7 +34,7 @@ class LobbyContainer extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return { 
             player: state.player
       }

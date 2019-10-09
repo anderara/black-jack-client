@@ -14,7 +14,7 @@ export default function Lobby (props) {
                 <label>
                 Create a new room
                 </label>
-                <input type='text' name='room name' value={gameRoomName} onChange={props.onChange}/>
+                <input type='text' name='gameRoomName' value={gameRoomName} onChange={props.onChange}/>
                 <label>Room Name</label>
             <input type='submit' value='submit'/>
         </form>

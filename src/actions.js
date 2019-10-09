@@ -60,10 +60,11 @@ function createRoom(payload) {
 
 export const createGameRoom = (gameRoomName) => (dispatch, getState) => {
     request
-        .post(`${baseUrl}/lobby`)
+        .post(`${baseUrl}/gameroom`)
         .send({gameRoomName})
+        .then(console.log('printing the room created ', {gameRoomName}))
         .then(response => {
-            console.log('Create room named ', response)
+            // console.log('Create room named ', request)
             const action = createRoom()
             dispatch(action)
         })

@@ -91,9 +91,10 @@ function joinRoom(payload) {
 export const addPlayerToRoom = (gameRoomId) => (dispatch, getState) => {
     const state = getState()
     const {player} = state
-    console.log(`getState*() is ${state} while var player is ${player}`)
+    console.log("state is",  state)
+    console.log('baseUrl is', baseUrl)
     request
-        .put(`${baseUrl}/gameroom`)
+        .put(`${baseUrl}/joinroom`)
         .set('Authorization', `Bearer ${player}`)
         .send({gameRoomId})
         .then(console.log('Add player to room --> ', {gameRoomId}))

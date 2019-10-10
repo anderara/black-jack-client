@@ -31,7 +31,7 @@ class LobbyContainer extends React.Component {
     this.setState({
         gameRoomName: ''
     })
-    this.props.history.replace("/gameRoom")
+    
   }
 
   onJoinRoom = (event) => {
@@ -40,6 +40,8 @@ class LobbyContainer extends React.Component {
     console.log("gameRoomId from lobby is:", event.target.id)
     const gameRoomId = event.target.id
     this.props.addPlayerToRoom(gameRoomId)
+
+    this.props.history.replace("/gameRoom")
   }
 
   onChange = (event) => {
@@ -52,6 +54,7 @@ class LobbyContainer extends React.Component {
   render() {
     // console.log('this state in the render', this.state)
       // console.log('lobby container ->', this.onChange)
+      console.log('this.props in LOBBYCONTAINER IS', this.props)
       // { this.state.gameRoomName.length>0?this.state.gameRoomName.map(gameroom => <li>{gameroom}</li>):'loading...'}
     return <div> <Lobby
       onSubmit={this.onSubmit}

@@ -3,6 +3,7 @@ import request from 'superagent'
 export const LOGIN = 'LOGIN'
 export const CREATE_ROOM = 'CREATE_ROOM'
 export const ADD_ROOMS = 'ADD_ROOMS'
+export const JOIN_ROOM = 'JOIN_ROOM'
 
 // const baseUrl = 'http://localhost:4000'
 // const baseUrl = 'http://172.16.30.254:4000'
@@ -78,4 +79,30 @@ export function addRooms(payload) {
         type: ADD_ROOMS,
         payload
     }
+}
+
+function joinRoom(payload) {
+    return {
+        type: JOIN_ROOM,
+        payload
+    }
+}
+
+export const addPlayerToRoom = (gameRoomId) => (dispatch, getState) => {
+    const state = getState()
+    const {player} = state
+    console.log(`getState*() is ${state} while var player is ${player}`)
+    request
+        .put(`${baseUrl}/gameroom`)
+        .set('Authorization', `Bearer ${player}`)
+        .send({gameRoomId})
+        .then(console.log('Add player to room --> ', {gameRoomId}))
+        .then(response => {
+            // console.log('Create room named ', request)
+            const action = joinRoom()
+            dispatch(action)
+        })
+        .catch(res => {
+            alert(res.message)
+        })
 }

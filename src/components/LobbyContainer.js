@@ -1,7 +1,7 @@
 import React from 'react'
 import Lobby from './Lobby'
 import { connect } from 'react-redux'
-import { createGameRoom, baseUrl, addRooms} from '../actions'
+import { createGameRoom, baseUrl, addRooms, addPlayerToRoom} from '../actions'
 //import { Redirect } from 'react-router-dom'
 
 class LobbyContainer extends React.Component {
@@ -35,7 +35,10 @@ class LobbyContainer extends React.Component {
 
   onJoinRoom = (event) => {
     event.preventDefault()
+
     console.log("gameRoomId from lobby is:", event.target.id)
+    const gameRoomId = event.target.id
+    this.props.addPlayerToRoom(gameRoomId)
   }
 
   onChange = (event) => {
@@ -55,6 +58,7 @@ class LobbyContainer extends React.Component {
       onJoinRoom={this.onJoinRoom}
       value={this.state}
       rooms = {this.props.rooms}
+      addPlayerToRoom = {this.addPlayerToRoom}
     />
     
     </div>
@@ -68,4 +72,4 @@ function mapStateToProps(state) {
       }
 }
 
-export default connect(mapStateToProps, { createGameRoom, addRooms })(LobbyContainer)
+export default connect(mapStateToProps, { createGameRoom, addRooms, addPlayerToRoom })(LobbyContainer)

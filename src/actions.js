@@ -5,6 +5,7 @@ export const CREATE_ROOM = 'CREATE_ROOM'
 export const ADD_ROOMS = 'ADD_ROOMS'
 export const JOIN_ROOM = 'JOIN_ROOM'
 export const ALL_PLAYERS_IN_ROOM = 'ALL_PLAYERS_IN_ROOM'
+export const SAVE_PLAYERNAME = 'SAVE_PLAYERNAME'
 
 // const baseUrl = 'http://localhost:4000'
 // const baseUrl = 'http://172.16.30.254:4000'
@@ -18,6 +19,13 @@ function signUpPlayer(payload){
     }
    }
 
+function savePlayerName(payload){
+    return {
+        type: SAVE_PLAYERNAME,
+        payload
+    }
+}
+
 export const signUp = (playerName, email, password) => (dispatch, getState) => {
     request
         .post(`${baseUrl}/player`)
@@ -25,6 +33,10 @@ export const signUp = (playerName, email, password) => (dispatch, getState) => {
         .then(response => {
             const action = signUpPlayer(response.body)
             dispatch(action)
+
+            //set redux state playername so I know who I am when I join a room
+            const actionPlayerName = savePlayerName(playerName)
+            dispatch(actionPlayerName)
         })
         .catch(console.error)
    }
@@ -108,7 +120,7 @@ export const getRoomInfo = () => (dispatch, getState) => {
     request
         .get(`${baseUrl}/playingroom`)
         .set('Authorization', `Bearer ${player}`)
-        .then(response => {console.log('Room info -> ', response)})
+        .then(response => {return response})
         .catch(error => {alert(error.message)})
 }
 

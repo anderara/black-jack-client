@@ -27,6 +27,7 @@ class ActualRoomContainer extends React.Component {
         return <div> <ActualRoom
           getRoomInfo = {this.props.getRoomInfo}
           getPlayersInRoom = {this.props.playersinroom}
+          myName = {this.props.playername}
           
         />
         
@@ -38,7 +39,8 @@ function mapStateToProps(state) {
     return { 
               player: state.player,
               rooms: state.rooms,
-              playersinroom: state.playersinroom //players that are in the room
+              playersinroom: state.playersinroom, //players that are in the room
+              playername: state.playername //this is my name
         }
   }
   

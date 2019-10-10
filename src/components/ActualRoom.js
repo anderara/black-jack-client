@@ -2,14 +2,16 @@ import React from 'react'
 
 export default function ActualRooms (props) {
 
+    
+    const myName = props.myName
     const playersInRoom = props.getPlayersInRoom
+    const strangersInRoom = playersInRoom.filter(player => player.playerName !== myName)
 
-    const getRoomInfo = props.getRoomInfo
-    console.log('playersInRoom is fuckin', playersInRoom)
+    console.log('strangersInRoom is fuckin', strangersInRoom)
         //console.log('ACTUAL ROOM props is', props)
         return (<div>
-            {getRoomInfo()}
-            {playersInRoom? playersInRoom.map(player => <li>{player.playerName}</li>):<p>...loading</p>}
+            <h1>You are {myName}</h1>
+            {strangersInRoom? strangersInRoom.map(stranger =>  <li>{stranger.playerName}</li>):<p>...loading</p>}
             <button>TEST START</button>
             </div>
         )

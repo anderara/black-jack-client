@@ -1,5 +1,4 @@
 import React from 'react'
-import Lobby from './Lobby'
 
 export default function LoginForm (props) {
     

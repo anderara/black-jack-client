@@ -31,6 +31,7 @@ class LobbyContainer extends React.Component {
     this.setState({
         gameRoomName: ''
     })
+    this.props.history.replace("/gameRoom")
   }
 
   onJoinRoom = (event) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { baseUrl, getRoomInfo, getPlayersInRoom } from '../actions'
+import { baseUrl, getRoomInfo, getPlayersInRoom, getCards } from '../actions'
 
 import ActualRoom from './ActualRoom'
 
@@ -21,13 +21,20 @@ class ActualRoomContainer extends React.Component {
         
     }
 
+    playerReady = (event) => {
+      event.preventDefault()
+      this.props.getCards()
+      console.log('PLAYERREADY IS CALLED!!!!')
+    }
+
     render() {
       console.log('this.props in ACTUALROOMCONTAINER', this.props)
           // { this.state.gameRoomName.length>0?this.state.gameRoomName.map(gameroom => <li>{gameroom}</li>):'loading...'}
         return <div> <ActualRoom
           getRoomInfo = {this.props.getRoomInfo}
           getPlayersInRoom = {this.props.playersinroom}
-          myName = {this.props.playername}
+          myName = {this.props.player.name}
+          playerReady = {this.playerReady}
           
         />
         
@@ -44,4 +51,4 @@ function mapStateToProps(state) {
         }
   }
   
-export default connect(mapStateToProps, { getRoomInfo, getPlayersInRoom })(ActualRoomContainer)
+export default connect(mapStateToProps, { getRoomInfo, getPlayersInRoom, getCards })(ActualRoomContainer)

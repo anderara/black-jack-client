@@ -13,6 +13,7 @@ export const SAVE_PLAYERNAME = 'SAVE_PLAYERNAME'
 export const baseUrl = process.env.DATABASE_URL || 'http://172.16.30.254:4000'
 
 function signUpPlayer(payload){
+    console.log("what is this ac", signUp)
     return {
       type: signUp,
       payload: payload.jwt
@@ -32,6 +33,7 @@ export const signUp = (playerName, email, password) => (dispatch, getState) => {
         .send({playerName, email, password})
         .then(response => {
             const action = signUpPlayer(response.body)
+            console.log("signup act cre res ", response.body)
             dispatch(action)
 
             //set redux state playername so I know who I am when I join a room
@@ -44,7 +46,7 @@ export const signUp = (playerName, email, password) => (dispatch, getState) => {
 function loginUser(payload){
     return {
       type: LOGIN,
-      payload: payload.jwt
+      payload: payload
     }
    }
 
@@ -53,6 +55,8 @@ export const login = (email, password) => (dispatch, getState) => {
         .post(`${baseUrl}/login`)
         .send({email, password})
         .then(response => {
+            console.log(" -THIS IS RESPONSE LOGIN ACTION --", response.body)
+            //and id and name 
             const action = loginUser(response.body)
             dispatch(action)
         })
@@ -98,11 +102,11 @@ function joinRoom(payload) {
 
 export const addPlayerToRoom = (gameRoomId) => (dispatch, getState) => {
     const state = getState()
-    const {player} = state
+    const {jwt} = state.player
 
     request
         .put(`${baseUrl}/joinroom`)
-        .set('Authorization', `Bearer ${player}`)
+        .set('Authorization', `Bearer ${jwt}`)
         .send({gameRoomId})
         .then(console.log('Add player to room --> ', {gameRoomId}))
         .then(response => {
@@ -129,5 +133,15 @@ export function getPlayersInRoom(payload) {
         type: ALL_PLAYERS_IN_ROOM,
         payload
     }
+}
+
+export const getCards = () => (dispatch, getState) => {
+    const state = getState()
+    const {jwt} = state.player
+    request
+        .put(`${baseUrl}/playercards`)
+        .set('Authorization', `Bearer ${jwt}`)
+        .then(response => {return response})
+        .catch(error => {alert(error.message)})
 }
 

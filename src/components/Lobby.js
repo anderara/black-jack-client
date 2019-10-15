@@ -1,11 +1,12 @@
 //black-jack-client/components/Lobby.js
 import React from 'react'
+import player from '../reducers/player'
 
 export default function Lobby (props) {
 
     const gameRoomName = props.gameRoomName 
     const gameRooms = props.rooms
-    // console.log('props in lobby.js is:', props)
+    let playersInRoom = []
         return (
 
             <div>
@@ -22,14 +23,16 @@ export default function Lobby (props) {
                 </form>
                 
                     {gameRooms.length?gameRooms.map(gameroom => {
+                        {playersInRoom = gameRooms.find(gameRoom => gameRoom.id === gameroom.id).players}
                     return (
 
                         <div border ="2">
 
-                            {/* {console.log('Logging PROPS.ROOMS in the Lobby:', props.rooms[0].id)} */}
                             <form onSubmit={props.onJoinRoom} key={gameroom.id} id={gameroom.id} name={gameroom.id}>
                                 <p>{gameroom.gameRoomName}</p>
                                 Wanna join this room, ya bas?
+                                <p>Players Already In Room</p>
+                                {playersInRoom.map(playerName=> <li>{playerName.playerName}</li>)}
                                 <input type="submit" value="Join Room" />
                             </form>
 

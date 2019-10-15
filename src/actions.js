@@ -10,7 +10,7 @@ export const SAVE_PLAYERNAME = 'SAVE_PLAYERNAME'
 // const baseUrl = 'http://localhost:4000'
 // const baseUrl = 'http://172.16.30.254:4000'
 
-export const baseUrl = process.env.DATABASE_URL || 'http://172.16.30.254:4000'
+export const baseUrl = process.env.DATABASE_URL || 'http://localhost:4000'
 
 function signUpPlayer(payload){
     console.log("what is this ac", signUp)
@@ -66,6 +66,7 @@ export const login = (email, password) => (dispatch, getState) => {
         }
 
 function createRoom(payload) {
+    console.log('createRoom payload is', payload)
     return {
         type: CREATE_ROOM,
         payload
@@ -73,12 +74,15 @@ function createRoom(payload) {
 }
 
 export const createGameRoom = (gameRoomName) => (dispatch, getState) => {
+
     request
         .post(`${baseUrl}/gameroom`)
         .send({gameRoomName})
         // .then(console.log('printing the room created ', {gameRoomName}))
         .then(response => {
+            console.log('response in createGameRoom is', response)
             const action = createRoom()
+            
             dispatch(action)
         })
         .catch(res => {
@@ -111,6 +115,7 @@ export const addPlayerToRoom = (gameRoomId) => (dispatch, getState) => {
         .then(console.log('Add player to room --> ', {gameRoomId}))
         .then(response => {
             const action = joinRoom()
+            console.log('action in addPlayerToRoom in action.js is', action)
             dispatch(action)
         })
         .catch(res => {

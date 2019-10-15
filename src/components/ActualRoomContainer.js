@@ -4,9 +4,10 @@ import { baseUrl, getRoomInfo, getPlayersInRoom, getCards } from '../actions'
 
 import ActualRoom from './ActualRoom'
 
+
 class ActualRoomContainer extends React.Component {
 
-    source = new EventSource(`${baseUrl}/playingroom`)
+    source = new EventSource(`${baseUrl}/playercards`)
   
     componentDidMount() {
       this.source.onmessage = event => {
@@ -17,24 +18,26 @@ class ActualRoomContainer extends React.Component {
         this.props.getPlayersInRoom(players)
       }
 
-        console.log("Component ACTUAL ROOM LOADED")
+        console.log("ACTUAL ROOM this.props is:", this.props)
         
     }
 
     playerReady = (event) => {
       event.preventDefault()
       this.props.getCards()
-      console.log('PLAYERREADY IS CALLED!!!!')
+ 
     }
 
     render() {
-      console.log('this.props in ACTUALROOMCONTAINER', this.props)
+      
+     
           // { this.state.gameRoomName.length>0?this.state.gameRoomName.map(gameroom => <li>{gameroom}</li>):'loading...'}
         return <div> <ActualRoom
           getRoomInfo = {this.props.getRoomInfo}
           getPlayersInRoom = {this.props.playersinroom}
           myName = {this.props.player.name}
           playerReady = {this.playerReady}
+          rooms = {this.props.rooms}
           
         />
         

@@ -6,19 +6,18 @@ import { createGameRoom, baseUrl, addRooms, addPlayerToRoom} from '../actions'
 
 class LobbyContainer extends React.Component {
 
-  // componentDidMount(){
-  //   console.log('Sloppy function', displayRooms())
-  // }
+
   source = new EventSource(`${baseUrl}/gameroom`)
 
   componentDidMount() {
     this.source.onmessage = event => {
-      console.log(event)
+
       const rooms = JSON.parse(event.data)
+      console.log('rooms in Lobby Container is', rooms)
       // this.setState({gameRoomName:rooms})
       this.props.addRooms(rooms)
     }
-    // console.log("TESTING stream:", rooms)
+  
   }
 
   state = { gameRoomName: ''}
@@ -26,7 +25,7 @@ class LobbyContainer extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault()
-    // console.log('Lobby name: ', this.state.gameRoomName)
+    console.log('onSubmit in LobbyContainer is running this.state.gameRoomName', this.state.gameRoomName)
     this.props.createGameRoom(this.state.gameRoomName)
     this.setState({
         gameRoomName: ''

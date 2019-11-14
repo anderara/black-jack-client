@@ -13,7 +13,6 @@ export const SAVE_PLAYERNAME = 'SAVE_PLAYERNAME'
 export const baseUrl = process.env.DATABASE_URL || 'http://localhost:4000'
 
 function signUpPlayer(payload){
-    console.log("what is this ac", signUp)
     return {
       type: signUp,
       payload: payload.jwt
@@ -33,7 +32,6 @@ export const signUp = (playerName, email, password) => (dispatch, getState) => {
         .send({playerName, email, password})
         .then(response => {
             const action = signUpPlayer(response.body)
-            console.log("signup act cre res ", response.body)
             dispatch(action)
 
             //set redux state playername so I know who I am when I join a room
@@ -55,8 +53,6 @@ export const login = (email, password) => (dispatch, getState) => {
         .post(`${baseUrl}/login`)
         .send({email, password})
         .then(response => {
-            console.log(" -THIS IS RESPONSE LOGIN ACTION --", response.body)
-            //and id and name 
             const action = loginUser(response.body)
             dispatch(action)
         })
@@ -113,7 +109,6 @@ export const addPlayerToRoom = (gameRoomId) => (dispatch, getState) => {
         .put(`${baseUrl}/joinroom`)
         .set('Authorization', `Bearer ${jwt}`)
         .send({gameRoomId})
-     //   .then(console.log('Add player to room --> ', {gameRoomId}))
         .then(response => {
             const action = joinRoom(null)
             console.log('action in addPlayerToRoom in action.js is', action)

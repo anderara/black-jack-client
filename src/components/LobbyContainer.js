@@ -13,8 +13,6 @@ class LobbyContainer extends React.Component {
     this.source.onmessage = event => {
 
       const rooms = JSON.parse(event.data)
-      console.log('rooms in Lobby Container is', rooms)
-      // this.setState({gameRoomName:rooms})
       this.props.addRooms(rooms)
     }
   
@@ -24,7 +22,6 @@ class LobbyContainer extends React.Component {
   
 
   onSubmit = (event) => {
-    console.log("CREATING A ROOM")
     event.preventDefault()
     this.props.createGameRoom(this.state.gameRoomName)
     this.setState({
@@ -35,11 +32,8 @@ class LobbyContainer extends React.Component {
 
   onJoinRoom = (event) => {
     event.preventDefault()
-
-    console.log("gameRoomId from lobby is:", event.target.id)
     const gameRoomId = event.target.id
     this.props.addPlayerToRoom(gameRoomId)
-
     this.props.history.replace("/gameRoom")
   }
 

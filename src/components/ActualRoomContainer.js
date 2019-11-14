@@ -11,27 +11,17 @@ class ActualRoomContainer extends React.Component {
   
     componentDidMount() {
       this.source.onmessage = event => {
-        console.log(event)
         const players = JSON.parse(event.data)
-        console.log('Stream of players is: ', players)
-        // this.setState({gameRoomName:rooms})
         this.props.getPlayersInRoom(players)
-      }
-
-        console.log("ACTUAL ROOM this.props is:", this.props)
-        
+      }        
     }
 
     playerReady = (event) => {
       event.preventDefault()
       this.props.getCards()
- 
     }
-
     render() {
-      
-     
-          // { this.state.gameRoomName.length>0?this.state.gameRoomName.map(gameroom => <li>{gameroom}</li>):'loading...'}
+
         return <div> <ActualRoom
           getRoomInfo = {this.props.getRoomInfo}
           getPlayersInRoom = {this.props.playersinroom}

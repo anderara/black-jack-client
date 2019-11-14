@@ -66,7 +66,7 @@ export const login = (email, password) => (dispatch, getState) => {
         }
 
 function createRoom(payload) {
-    console.log('createRoom payload is', payload)
+    console.log('CREATING A ROOM FUNCTION')
     return {
         type: CREATE_ROOM,
         payload
@@ -78,13 +78,13 @@ export const createGameRoom = (gameRoomName) => (dispatch, getState) => {
     request
         .post(`${baseUrl}/gameroom`)
         .send({gameRoomName})
-        // .then(console.log('printing the room created ', {gameRoomName}))
         .then(response => {
             console.log('response in createGameRoom is', response)
             const action = createRoom()
             
             dispatch(action)
         })
+
         .catch(res => {
             alert(res.message)
         })
@@ -98,6 +98,7 @@ export function addRooms(payload) {
 }
 
 function joinRoom(payload) {
+    console.log('JOINING ROOM')
     return {
         type: JOIN_ROOM,
         payload
@@ -112,9 +113,9 @@ export const addPlayerToRoom = (gameRoomId) => (dispatch, getState) => {
         .put(`${baseUrl}/joinroom`)
         .set('Authorization', `Bearer ${jwt}`)
         .send({gameRoomId})
-        .then(console.log('Add player to room --> ', {gameRoomId}))
+     //   .then(console.log('Add player to room --> ', {gameRoomId}))
         .then(response => {
-            const action = joinRoom()
+            const action = joinRoom(null)
             console.log('action in addPlayerToRoom in action.js is', action)
             dispatch(action)
         })

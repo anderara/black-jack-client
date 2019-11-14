@@ -24,8 +24,8 @@ class LobbyContainer extends React.Component {
   
 
   onSubmit = (event) => {
+    console.log("CREATING A ROOM")
     event.preventDefault()
-    console.log('onSubmit in LobbyContainer is running this.state.gameRoomName', this.state.gameRoomName)
     this.props.createGameRoom(this.state.gameRoomName)
     this.setState({
         gameRoomName: ''
@@ -44,17 +44,12 @@ class LobbyContainer extends React.Component {
   }
 
   onChange = (event) => {
-      // console.log('I am changing in the lobby', event.target.value)
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
   render() {
-    // console.log('this state in the render', this.state)
-      // console.log('lobby container ->', this.onChange)
-      console.log('this.props in LOBBYCONTAINER IS', this.props)
-      // { this.state.gameRoomName.length>0?this.state.gameRoomName.map(gameroom => <li>{gameroom}</li>):'loading...'}
     return <div> <Lobby
       onSubmit={this.onSubmit}
       onChange={this.onChange}

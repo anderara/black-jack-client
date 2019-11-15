@@ -134,7 +134,7 @@ export const removePlayerFromRoom = () => (dispatch, getState) => {
             console.log('Response from ', response.message)
             //here we might want to dispatch an action that saves the response on redux
         })
-        .catch(res => {
+        .catch(response => {
             alert(response.message)
         })
 }

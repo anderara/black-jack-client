@@ -72,14 +72,13 @@ function createRoom(payload) {
 }
 
 export const createGameRoom = (gameRoomName) => (dispatch, getState) => {
-
+    console.log('createGameRoom function')
     request
         .post(`${baseUrl}/gameroom`)
         .send({gameRoomName})
         .then(response => {
-            console.log('response in createGameRoom is', response)
-            const action = createRoom()
-            
+            console.log('CREATING A ROOM')
+            const action = createRoom()  
             dispatch(action)
         })
 
@@ -112,9 +111,11 @@ export const addPlayerToRoom = (gameRoomId) => (dispatch, getState) => {
         .set('Authorization', `Bearer ${jwt}`)
         .send({gameRoomId})
         .then(response => {
-            const action = joinRoom(null)
+            console.log('JOIN ROOM')
+            /*const action = joinRoom(null)
             console.log('action in addPlayerToRoom in action.js is', action)
-            dispatch(action)
+            dispatch(action)*/
+            //joinRoom is never called for some reason but it does not seem to be required
         })
         .catch(res => {
             alert(res.message)

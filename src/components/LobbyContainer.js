@@ -22,6 +22,7 @@ class LobbyContainer extends React.Component {
   
 
   onSubmit = (event) => {
+    console.log('lobbycontainer creating a room')
     event.preventDefault()
     this.props.createGameRoom(this.state.gameRoomName)
     this.setState({

@@ -1,6 +1,7 @@
 import request from 'superagent'
-import { createBrowserHistory } from 'history'
-export const browserHistory = createBrowserHistory()
+// import { createBrowserHistory } from 'history'
+// export const browserHistory = createBrowserHistory()
+import {browserHistory} from '../src/index'
 
 export const LOGIN = 'LOGIN'
 export const CREATE_ROOM = 'CREATE_ROOM'
@@ -12,7 +13,7 @@ export const SAVE_PLAYERNAME = 'SAVE_PLAYERNAME'
 // const baseUrl = 'http://localhost:4000'
 // const baseUrl = 'http://172.16.30.254:4000'
 
-export const baseUrl = 'http://0165d74f.ngrok.io'
+export const baseUrl = 'http://14c9ef74.ngrok.io'
 
 //process.env.DATABASE_URL || 'http://localhost:4000'
 
@@ -125,20 +126,22 @@ export const addPlayerToRoom = (gameRoomId) => (dispatch, getState) => {
 }
 
 export const removePlayerFromRoom = () => (dispatch, getState) => {
+    console.log("hi")
     const state = getState()
     const {jwt} = state.player
 
-    request
+    browserHistory.push('/lobby');
+
+    return request
         .put(`${baseUrl}/exitroom`)
         .set('Authorization', `Bearer ${jwt}`)
-        .then(
+        .then(() => {
             //response => {
             //const action = joinRoom(null) -> this is old code (copy-pasted it)
-            console.log('Response from exit room'),
-            browserHistory.push('/lobby')
+            console.log('Response from exit rooms');
+            browserHistory.push('/lobby');
             //here we might want to dispatch an action that saves the response on redux
-
-        )
+        })
         .catch(response => {
             alert(response.message)
         })

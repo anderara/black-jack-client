@@ -10,19 +10,19 @@ class LobbyContainer extends React.Component {
   source = new EventSource(`${baseUrl}/gameroom`)
 
   componentDidMount() {
+    console.log('lobby?')
     this.source.onmessage = event => {
 
       const rooms = JSON.parse(event.data)
       this.props.addRooms(rooms)
     }
-  
+
   }
 
   state = { gameRoomName: ''}
   
 
   onSubmit = (event) => {
-    console.log('lobbycontainer creating a room')
     event.preventDefault()
     this.props.createGameRoom(this.state.gameRoomName)
     this.setState({

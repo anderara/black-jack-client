@@ -1,6 +1,8 @@
 import React from 'react'
+import { useHistory } from "react-router";
 
 export default function ActualRooms (props) {
+    const history = useHistory()
 
     const myName = props.myName
     const playersInRoom = props.getPlayersInRoom
@@ -28,7 +30,11 @@ export default function ActualRooms (props) {
             <h2>The others in the room are: {nameOfStrangers?nameOfStrangers.map(stranger => <li>{stranger.playerName}</li>):<p>Waiting for players</p>}</h2>
             {myData? <div><img src = {myData.card1} alt = 'card'/><img src = {myData.card2} alt = 'card'/></div>:<p>loading</p>}
             <button type="text" onClick={playerReady}>Click me</button>
-            <button type="text" onClick={removePlayerFromRoom}>Exit Room</button>
+            <button type="text" onClick={() => {
+                removePlayerFromRoom().finally(() => {
+                    // history.push("/lobby")
+                })
+            }}>Exit Room</button>
             </div>
         )
 }

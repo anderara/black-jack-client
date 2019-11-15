@@ -16,7 +16,7 @@ export default function ActualRooms (props) {
     if(myRoom&&rooms.length>0){
 
         myRoomName = rooms.find(room => room.id===myRoom.gameroomId)
-        myRoomName=myRoomName.gameRoomName
+        // myRoomName=myRoomName.gameRoomName
         nameOfStrangers = strangersInRoom.filter(stranger => {
                 return stranger.gameroomId===myRoom.gameroomId})
     }

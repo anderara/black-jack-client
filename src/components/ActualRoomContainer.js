@@ -12,7 +12,7 @@ class ActualRoomContainer extends React.Component {
     componentDidMount() {
       this.source.onmessage = event => {
         const players = JSON.parse(event.data)
-        this.props.getPlayersInRoom(players)
+       // this.props.getPlayersInRoom(players)
       }        
     }
 

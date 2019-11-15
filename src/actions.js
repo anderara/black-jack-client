@@ -1,4 +1,6 @@
 import request from 'superagent'
+import { createBrowserHistory } from 'history'
+export const browserHistory = createBrowserHistory()
 
 export const LOGIN = 'LOGIN'
 export const CREATE_ROOM = 'CREATE_ROOM'
@@ -129,11 +131,14 @@ export const removePlayerFromRoom = () => (dispatch, getState) => {
     request
         .put(`${baseUrl}/exitroom`)
         .set('Authorization', `Bearer ${jwt}`)
-        .then(response => {
+        .then(
+            //response => {
             //const action = joinRoom(null) -> this is old code (copy-pasted it)
-            console.log('Response from ', response.message)
+            console.log('Response from exit room'),
+            browserHistory.push('/lobby')
             //here we might want to dispatch an action that saves the response on redux
-        })
+
+        )
         .catch(response => {
             alert(response.message)
         })

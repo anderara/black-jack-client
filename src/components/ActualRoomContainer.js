@@ -6,8 +6,8 @@ import ActualRoom from './ActualRoom'
 
 
 class ActualRoomContainer extends React.Component {
-
-    source = new EventSource(`${baseUrl}/playercards`)
+  ///playingroom playercards
+    source = new EventSource(`${baseUrl}/playingroom`)
   
     componentDidMount() {
       this.source.onmessage = event => {

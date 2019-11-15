@@ -10,7 +10,9 @@ export const SAVE_PLAYERNAME = 'SAVE_PLAYERNAME'
 // const baseUrl = 'http://localhost:4000'
 // const baseUrl = 'http://172.16.30.254:4000'
 
-export const baseUrl = process.env.DATABASE_URL || 'http://localhost:4000'
+export const baseUrl = 'http://0165d74f.ngrok.io'
+
+//process.env.DATABASE_URL || 'http://localhost:4000'
 
 function signUpPlayer(payload){
     return {
@@ -116,6 +118,23 @@ export const addPlayerToRoom = (gameRoomId) => (dispatch, getState) => {
         })
         .catch(res => {
             alert(res.message)
+        })
+}
+
+export const removePlayerFromRoom = () => (dispatch, getState) => {
+    const state = getState()
+    const {jwt} = state.player
+
+    request
+        .put(`${baseUrl}/exitroom`)
+        .set('Authorization', `Bearer ${jwt}`)
+        .then(response => {
+            //const action = joinRoom(null) -> this is old code (copy-pasted it)
+            console.log('Response from ', response.message)
+            //here we might want to dispatch an action that saves the response on redux
+        })
+        .catch(res => {
+            alert(response.message)
         })
 }
 

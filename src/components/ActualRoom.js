@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function ActualRooms (props) {
 
-    
     const myName = props.myName
     const playersInRoom = props.getPlayersInRoom
     const rooms = props.rooms

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { baseUrl, getRoomInfo, getPlayersInRoom, getCards } from '../actions'
+import { baseUrl, getRoomInfo, getPlayersInRoom, getCards, removePlayerFromRoom } from '../actions'
 
 import ActualRoom from './ActualRoom'
 
@@ -28,6 +28,7 @@ class ActualRoomContainer extends React.Component {
           myName = {this.props.player.name}
           playerReady = {this.playerReady}
           rooms = {this.props.rooms}
+          removePlayerFromRoom = {this.props.removePlayerFromRoom}
           
         />
         
@@ -44,4 +45,4 @@ function mapStateToProps(state) {
         }
   }
   
-export default connect(mapStateToProps, { getRoomInfo, getPlayersInRoom, getCards })(ActualRoomContainer)
+export default connect(mapStateToProps, { getRoomInfo, getPlayersInRoom, getCards, removePlayerFromRoom })(ActualRoomContainer)

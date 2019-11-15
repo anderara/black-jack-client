@@ -7,6 +7,7 @@ export default function ActualRooms (props) {
     const rooms = props.rooms
     const strangersInRoom = playersInRoom.filter(player => player.playerName !== myName)
     const playerReady = props.playerReady
+    const removePlayerFromRoom = props.removePlayerFromRoom
 
     //Find the room id of the room that I am in
     const myRoom = playersInRoom.find(playerInRoom => playerInRoom.playerName===myName)
@@ -27,6 +28,7 @@ export default function ActualRooms (props) {
             <h2>The others in the room are: {nameOfStrangers?nameOfStrangers.map(stranger => <li>{stranger.playerName}</li>):<p>Waiting for players</p>}</h2>
             {myData? <div><img src = {myData.card1} alt = 'card'/><img src = {myData.card2} alt = 'card'/></div>:<p>loading</p>}
             <button type="text" onClick={playerReady}>Click me</button>
+            <button type="text" onClick={removePlayerFromRoom}>Exit Room</button>
             </div>
         )
 }

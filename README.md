@@ -1,7 +1,7 @@
 # ♠️❤️ Black Jack ♣️♦️
 ## What this project is about
 
-Client side of the popular cards game developed with ma mate [AllanRaf](https://github.com/AllanRaf). This is a multiplier online game. Server-side source code can be seen [##here](https://github.com/anderara/black-jack-server).
+Client side of the popular card game developed with ma mate [AllanRaf](https://github.com/AllanRaf). This is a multiplier online game. Server-side source code can be seen [##here](https://github.com/anderara/black-jack-server).
 
 PLEASE NOTE: this project is still WORK IN PROGRESS
 

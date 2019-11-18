@@ -1,37 +1,55 @@
 import request from 'superagent'
+// import { createBrowserHistory } from 'history'
+// export const browserHistory = createBrowserHistory()
+import {browserHistory} from '../src/index'
 
 export const LOGIN = 'LOGIN'
+export const CREATE_ROOM = 'CREATE_ROOM'
+export const ADD_ROOMS = 'ADD_ROOMS'
+export const JOIN_ROOM = 'JOIN_ROOM'
+export const ALL_PLAYERS_IN_ROOM = 'ALL_PLAYERS_IN_ROOM'
+export const SAVE_PLAYERNAME = 'SAVE_PLAYERNAME'
 
 // const baseUrl = 'http://localhost:4000'
 // const baseUrl = 'http://172.16.30.254:4000'
 
-const baseUrl = process.env.DATABASE_URL || 'http://172.16.30.254:4000'
+export const baseUrl = 'http://14c9ef74.ngrok.io'
+
+//process.env.DATABASE_URL || 'http://localhost:4000'
 
 function signUpPlayer(payload){
-    console.log("SignUp payload is", payload)
     return {
       type: signUp,
       payload: payload.jwt
     }
    }
 
+function savePlayerName(payload){
+    return {
+        type: SAVE_PLAYERNAME,
+        payload
+    }
+}
+
 export const signUp = (playerName, email, password) => (dispatch, getState) => {
     request
         .post(`${baseUrl}/player`)
         .send({playerName, email, password})
         .then(response => {
-            console.log("response in LoginForm is: ", response)
             const action = signUpPlayer(response.body)
             dispatch(action)
+
+            //set redux state playername so I know who I am when I join a room
+            const actionPlayerName = savePlayerName(playerName)
+            dispatch(actionPlayerName)
         })
         .catch(console.error)
    }
 
 function loginUser(payload){
-    console.log("loginUser payload is", payload)
     return {
       type: LOGIN,
-      payload: payload.jwt
+      payload: payload
     }
    }
 
@@ -40,31 +58,119 @@ export const login = (email, password) => (dispatch, getState) => {
         .post(`${baseUrl}/login`)
         .send({email, password})
         .then(response => {
-            console.log("response in LoginForm is: ", response)
             const action = loginUser(response.body)
             dispatch(action)
         })
-        .catch(console.error)
+        .catch(res => {
+            alert(res.message)
+        })
         }
 
-// export const getPlayers = () => (dispatch, getState) => {
-// const state = getState()
-// const { playerName } = state
+function createRoom(payload) {
+    console.log('CREATING A ROOM FUNCTION')
+    return {
+        type: CREATE_ROOM,
+        payload
+    }
+}
 
-// if (!playerName.length) {
-//     request(`${baseUrl}/players`)
-//     .then(response => {
-//         const action = allPlayers(response.body)
+export const createGameRoom = (gameRoomName) => (dispatch, getState) => {
+    console.log('createGameRoom function')
+    request
+        .post(`${baseUrl}/gameroom`)
+        .send({gameRoomName})
+        .then(response => {
+            console.log('CREATING A ROOM')
+            const action = createRoom()  
+            dispatch(action)
+        })
 
-//         dispatch(action)
-//     })
-//     .catch(console.error)
-// }
-// }
+        .catch(res => {
+            alert(res.message)
+        })
+}
 
-// function newImage (payload) {
-//     return {
-//     type: NEW_IMAGE,
-//     payload
-//     }
-// }
+export function addRooms(payload) {
+    return {
+        type: ADD_ROOMS,
+        payload
+    }
+}
+
+function joinRoom(payload) {
+    console.log('JOINING ROOM')
+    return {
+        type: JOIN_ROOM,
+        payload
+    }
+}
+
+export const addPlayerToRoom = (gameRoomId) => (dispatch, getState) => {
+    const state = getState()
+    const {jwt} = state.player
+
+    request
+        .put(`${baseUrl}/joinroom`)
+        .set('Authorization', `Bearer ${jwt}`)
+        .send({gameRoomId})
+        .then(response => {
+            console.log('JOIN ROOM')
+            /*const action = joinRoom(null)
+            console.log('action in addPlayerToRoom in action.js is', action)
+            dispatch(action)*/
+            //joinRoom is never called for some reason but it does not seem to be required
+        })
+        .catch(res => {
+            alert(res.message)
+        })
+}
+
+export const removePlayerFromRoom = () => (dispatch, getState) => {
+    console.log("hi")
+    const state = getState()
+    const {jwt} = state.player
+
+    browserHistory.push('/lobby');
+
+    return request
+        .put(`${baseUrl}/exitroom`)
+        .set('Authorization', `Bearer ${jwt}`)
+        .then(() => {
+            //response => {
+            //const action = joinRoom(null) -> this is old code (copy-pasted it)
+            console.log('Response from exit rooms');
+            browserHistory.push('/lobby');
+            //here we might want to dispatch an action that saves the response on redux
+        })
+        .catch(response => {
+            alert(response.message)
+        })
+}
+
+export const getRoomInfo = () => (dispatch, getState) => {
+    const state = getState()
+    const {player} = state
+    request
+        .get(`${baseUrl}/playingroom`)
+        .set('Authorization', `Bearer ${player}`)
+        .then(response => {return response})
+        .catch(error => {alert(error.message)})
+}
+
+export function getPlayersInRoom(payload) {
+    return {
+        type: ALL_PLAYERS_IN_ROOM,
+        payload
+    }
+}
+
+export const getCards = () => (dispatch, getState) => {
+    const state = getState()
+    const {jwt} = state.player
+    request
+        .put(`${baseUrl}/playercards`)
+        .set('Authorization', `Bearer ${jwt}`)
+        .then(response => {return response})
+        .catch(error => {alert(error.message)})
+}
+

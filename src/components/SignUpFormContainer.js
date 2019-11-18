@@ -15,6 +15,8 @@ class SignUpFormContainer extends React.Component {
         email: '',
         password: ''
     })
+
+    this.props.history.replace("/login")
   }
 
   onChange = (event) => {
@@ -32,4 +34,12 @@ class SignUpFormContainer extends React.Component {
   }
 }
 
-export default connect(null, { signUp })(SignUpFormContainer)
+function mapStateToProps(state) {
+  return { 
+            player: state.player,
+            rooms: state.rooms,
+            playername: state.playername
+      }
+}
+
+export default connect(mapStateToProps, { signUp })(SignUpFormContainer)

@@ -20,12 +20,9 @@ Client side of the popular cards game developed with ma mate [AllanRaf](https://
 
 ## Goals for this project:
 
-- To practice for myself
-- To make an example for the students to see how they could have tackled the project.
-- 
+- To practice with a full-stack app
+- To practice streaming data from server to client with streams[https://github.com/substack/stream-handbook]
 
 ## Create React App
 
-This project was scaffolded using the create-react-app cli. 
-
-**[The standard create-react-app docs can be found in here](./create-react-app-docs.md)**
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

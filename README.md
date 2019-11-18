@@ -1,68 +1,74 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# ♠️❤️ Black Jack ♣️♦️
+## What this project is about
 
-In the project directory, you can run:
+Client side of the popular cards game developed with ma mate [AllanRaf](https://github.com/AllanRaf).
 
-### `npm start`
+## Table of contents:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **[Technologies used](#technologies-used)**
+- **[Goals for this project](#goals-for-this-project)**
+- **[Requirements briefing](#requirements)**
+- **[Features built so far overview with pull requests](#features-built-so-far-overview-with-pull-requests)**
+- **[My git workflow](#my-git-workflow)**
+- **[My agile workflow and trello board](#my-agile-workflow-and-trello-board)**
+- **[create-react-app-docs](#create-react-app)**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Technologies used
 
-### `npm test`
+#### 👀👇 Click links to view some samples in this project 👇👀
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **[react](./src/containers/Game.js)**  
+- **[redux](./src/reducers/question.js)**  
+- **[redux-thunk](./src/actions/api.js)** 
 
-### `npm run build`
+## Goals for this project:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- To practice for myself
+- To make an example for the students to see how they could have tackled the project.
+- **[To showcase disciplined git usage](#my-git-workflow)**
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Requirements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Checkout out: **[requirements.md](./requirements.md)**
 
-### `npm run eject`
+## Features built so far overview with pull requests
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### 👀👇 Click links to view the pull requests 👇👀
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **[Feat/display random dog image](https://github.com/Reinoptland/dog-quiz/pull/2)**
+- **[Feat/next question](https://github.com/Reinoptland/dog-quiz/pull/5)**
+- **[Feat/feedback on incorrect](https://github.com/Reinoptland/dog-quiz/pull/7)**
+- **[Bugfix/disable buttons on choice](https://github.com/Reinoptland/dog-quiz/pull/11)**
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## My git workflow
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+In this project I try to use:
 
-## Learn More
+- Good commit messages
+- Well named branches
+- Pull requests with summaries
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+If you have feedback to improve my git usage: **[please drop me a line!](https://www.linkedin.com/in/rein-op-t-land-295759124/)** 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Here is my branching model for this project.
 
-### Code Splitting
+```
+master (auto deploys) ______________________
+                       \               /
+development             \_____________/- pull request
+                         \           /
+feature/some-feature      \_commits_/- pull request
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## My agile workflow and Trello board
 
-### Analyzing the Bundle Size
+I try to maintain a backlog eventhough I'm working on a project by myself. That way people can quickly jump in and start helping out. It also displays how I split up my tasks and try to build this project in an iterative and incremental way!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+**[Check out my trelloboard here](https://trello.com/b/3gqJHfb6/dog-quiz)**
 
-### Making a Progressive Web App
+## Create React App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+This project was scaffolded using the create-react-app cli. 
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**[The standard create-react-app docs can be found in here](./create-react-app-docs.md)**
